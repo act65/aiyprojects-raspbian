@@ -38,7 +38,7 @@ def main():
         button.wait_for_press()
         print('Listening...')
         text = recognizer.recognize()
-        if text is None:
+        if not text:
             print('Sorry, I did not hear you.')
         elif 'hello' in text:
             to_repeat = 'hello'
