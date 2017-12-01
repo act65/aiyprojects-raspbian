@@ -42,18 +42,25 @@ def say(player, words, lang='en-US'):
       lang: language for the text-to-speech engine.
     """
     try:
-        (fd, tts_wav) = tempfile.mkstemp(suffix='.wav', dir=TMP_DIR)
+        # (fd, tts_wav) = tempfile.mkstemp(suffix='.wav', dir=TMP_DIR)
+        (fd, tts_mp3) = tempfile.mkstemp(suffix='.mp3', dir=TMP_DIR)
     except IOError:
         logger.exception('Using fallback directory for TTS output')
-        (fd, tts_wav) = tempfile.mkstemp(suffix='.wav')
+        # (fd, tts_wav) = tempfile.mkstemp(suffix='.wav')
+        (fd, tts_mp3) = tempfile.mkstemp(suffix='.mp3')
     os.close(fd)
-    words = '<volume level="60"><pitch level="130">%s</pitch></volume>' % words
+    # words = '<volume level="60"><pitch level="130">%s</pitch></volume>' % words
+   
+    tts_mp3 = '/tmp/voice.mp3' 
     try:
-        subprocess.call(['pico2wave', '--lang', lang, '-w', tts_wav, words])
-        player.play_wav(tts_wav)
+        # subprocess.call(['pico2wave', '--lang', lang, '-w', tts_wav, words])
+        # player.play_wav(tts_wav)
+        subprocess.call(['gtts-cli', words, '-l', lang, '-o', tts_mp3])
+        player.play(tts_mp3)
     finally:
-        os.unlink(tts_wav)
-
+        # os.unlink(tts_wav)
+        # os.unlink(tts_mp3)
+        pass
 
 def _main():
     import argparse

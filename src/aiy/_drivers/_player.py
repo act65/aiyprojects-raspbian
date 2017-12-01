@@ -23,7 +23,7 @@ import aiy._drivers._alsa
 logger = logging.getLogger('audio')
 
 
-class Player(object):
+class Player1(object):
     """Plays short audio clips from a buffer or file."""
 
     def __init__(self, output_device='default'):
@@ -69,3 +69,19 @@ class Player(object):
 
             frames = wav.readframes(wav.getnframes())
             self.play_bytes(frames, wav.getframerate(), wav.getsampwidth())
+
+
+class Player(object):
+    def __init__(self):
+        pass
+
+    def play(self, path):
+        cmd = ['mpg123', path]
+        mpg123 = subprocess.Popen(cmd, stdin=subprocess.PIPE)
+        # mpg123.stdin.write(path)
+        #mpg123.stdin.close()
+        #retcode = mpg123.wait()
+
+        # if retcode:
+        #    logger.error('mpg123 failed with %d', retcode)
+       

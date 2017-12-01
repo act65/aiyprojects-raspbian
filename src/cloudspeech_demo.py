@@ -15,6 +15,8 @@
 
 """A demo of the Google CloudSpeech recognizer."""
 
+import time
+
 import aiy.audio
 import aiy.cloudspeech
 import aiy.voicehat
@@ -25,6 +27,7 @@ def main():
     recognizer.expect_phrase('turn off the light')
     recognizer.expect_phrase('turn on the light')
     recognizer.expect_phrase('blink')
+    recognizer.expect_phrase('hello')
 
     button = aiy.voicehat.get_button()
     led = aiy.voicehat.get_led()
@@ -37,6 +40,18 @@ def main():
         text = recognizer.recognize()
         if text is None:
             print('Sorry, I did not hear you.')
+        elif 'hello' in text:
+            to_repeat = 'hello'
+            aiy.audio.say('hello', 'en')      
+            time.sleep(0.5)
+            print('hello')
+            aiy.audio.say('hello', 'de')
+            time.sleep(0.5)
+            aiy.audio.say('hello', 'es')      
+        elif 'repeat after me' in text:
+            to_repeat = text.replace('repeat after me', '', 1)
+            aiy.audio.say(to_repeat, 'eo')
+
         else:
             print('You said "', text, '"')
             if 'turn on the light' in text:
