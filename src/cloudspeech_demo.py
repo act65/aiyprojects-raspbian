@@ -50,7 +50,7 @@ def main():
             aiy.audio.say('hello', 'es')      
         elif 'repeat after me' in text:
             to_repeat = text.replace('repeat after me', '', 1)
-            aiy.audio.say(to_repeat, 'eo')
+            aiy.audio.say(to_repeat, 'zh')
 
         else:
             print('You said "', text, '"')

@@ -51,14 +51,10 @@ def say(player, words, lang='en-US', volume=60, pitch=130):
         # (fd, tts_wav) = tempfile.mkstemp(suffix='.wav')
         (fd, tts_mp3) = tempfile.mkstemp(suffix='.mp3')
     os.close(fd)
-<<<<<<< HEAD
-    # words = '<volume level="60"><pitch level="130">%s</pitch></volume>' % words
    
     tts_mp3 = '/tmp/voice.mp3' 
-=======
-    words = '<volume level="' + str(volume) + '"><pitch level="' + str(pitch) + \
-            '">' + words + '</pitch></volume>'
->>>>>>> d3f5a057bb04afc4285097d000183dadd715b215
+    # words = '<volume level="' + str(volume) + '"><pitch level="' + str(pitch) + \
+    #         '">' + words + '</pitch></volume>'
     try:
         # subprocess.call(['pico2wave', '--lang', lang, '-w', tts_wav, words])
         # player.play_wav(tts_wav)
